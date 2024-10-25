@@ -1,5 +1,5 @@
 {
-  "name": "data-analyzer",
+  "name": "@ankit047/data-analyzer",
   "version": "1.0.0",
   "description": "A powerful data management and analysis package for Node.js.",
   "main": "src/index.js",
