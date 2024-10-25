@@ -1,0 +1,31 @@
+{
+  "name": "data-analyzer",
+  "version": "1.0.0",
+  "description": "A powerful data management and analysis package for Node.js.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "data",
+    "analysis",
+    "csv",
+    "npm"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imankii01/data-analyzer.git"
+  },
+  "author": "Ankit",
+  "license": "MIT",
+  "dependencies": {
+    "chartjs-node-canvas": "^4.1.6",
+    "csv-parser": "^3.0.0",
+    "json2csv": "^6.0.0-alpha.2",
+    "lodash": "^4.17.21",
+    "simple-statistics": "^7.8.7"
+  },
+  "devDependencies": {
+    "jest": "^27.0.0"
+  }
+}
