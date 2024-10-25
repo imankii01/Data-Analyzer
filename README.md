@@ -162,7 +162,4 @@ Created by [Ankit](https://github.com/imankii01) - feel free to reach out:
 
 - Email: [private.ankit047@gmail.com](mailto:private.ankit047@gmail.com)
 
----
-
-> 🛠️ **Note**: This package is under continuous development. Check back for updates and new features! 
-```
+---```
