@@ -161,5 +161,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 Created by [Ankit](https://github.com/imankii01) - feel free to reach out:
 
 - Email: [private.ankit047@gmail.com](mailto:private.ankit047@gmail.com)
-
----```
