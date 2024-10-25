@@ -1,163 +1,185 @@
 ```markdown
 # 📊 Data Analyzer
 
-![License](https://img.shields.io/badge/license-MIT-green) ![Version](https://img.shields.io/badge/version-1.0.0-blue)
+![npm](https://img.shields.io/npm/v/@private.ankit047/data-analyzer) ![npm](https://img.shields.io/npm/dt/@private.ankit047/data-analyzer)
 
-A powerful and flexible data management and analysis package for Node.js. This package provides functionalities for parsing CSV files, cleaning data, performing statistical analysis, and visualizing data.
+## 📖 Overview
 
-## 📚 Table of Contents
+**Data Analyzer** is a comprehensive Node.js package designed for seamless data management and analysis. With a focus on ease of use and efficiency, it provides essential utilities for parsing CSV files, cleaning data, performing in-depth analysis, and visualizing results. This package is perfect for data scientists, analysts, and developers looking to enhance their data workflows!
 
-- [✨ Features](#features)
-- [📦 Installation](#installation)
-- [💻 Usage](#usage)
-  - [📥 Parsing CSV Files](#parsing-csv-files)
-  - [🧹 Cleaning Data](#cleaning-data)
-  - [📈 Analyzing Data](#analyzing-data)
-  - [📊 Visualizing Data](#visualizing-data)
-- [🛠️ API Documentation](#api-documentation)
-  - [🔍 parseCSV](#parsecsv)
-  - [🧼 cleanData](#cleandata)
-  - [📊 analyzeData](#analyzedata)
-  - [📈 plotData](#plotdata)
-- [✅ Testing](#testing)
-- [🤝 Contributing](#contributing)
-- [📝 License](#license)
-- [📧 Contact](#contact)
+## 🚀 Features
 
-## ✨ Features
+- **📥 CSV Parsing**: Effortlessly parse CSV files into JavaScript objects.
+- **🧹 Data Cleaning**: Remove duplicates, fill missing values, and ensure data integrity.
+- **📊 Data Analysis**: Perform various statistical analyses including averages, totals, and custom calculations.
+- **📈 Data Visualization**: Create dynamic plots and graphs to visualize your data clearly.
+- **📝 Documentation**: Comprehensive documentation with examples for easy integration.
 
-- **CSV Parsing**: Read and parse CSV files effortlessly.
-- **Data Cleaning**: Remove duplicates and fill missing values based on specified rules.
-- **Statistical Analysis**: Perform basic statistical operations like mean, median, mode, etc.
-- **Data Visualization**: Generate charts and graphs for better insights.
+## 🔗 Installation
 
-## 📦 Installation
-
-To install the package, use npm:
+To install the package, run the following command in your terminal:
 
 ```bash
-npm install data-analyzer
+npm install @private.ankit047/data-analyzer
 ```
 
-## 💻 Usage
+## 🛠️ Usage
 
-### 📥 Parsing CSV Files
+Here's a quick example to get you started with **Data Analyzer**. The example covers the entire workflow from parsing a CSV file to visualizing the analysis results.
 
-To parse CSV files, use the `parseCSV` function:
+### Step 1: Parsing a CSV File
+
+First, you need to parse a CSV file into JavaScript objects. This can be done using the `parseCSV` function.
 
 ```javascript
-const parseCSV = require('data-analyzer/src/parsers/parseCSV');
+const { parseCSV } = require('@private.ankit047/data-analyzer');
 
-parseCSV('path/to/your/file.csv').then(data => {
+// Parse a CSV file
+async function loadData() {
+    const data = await parseCSV('path/to/your/file.csv');
     console.log(data);
-}).catch(error => {
-    console.error('Error parsing CSV:', error);
-});
+}
+
+loadData();
 ```
 
-### 🧹 Cleaning Data
+### Step 2: Cleaning the Data
 
-The `cleanData` function can be used to clean your data:
+Once you have the data parsed, you may want to clean it to ensure it's ready for analysis. The `cleanData` function provides options for removing duplicates and filling in missing values.
 
 ```javascript
-const cleanData = require('data-analyzer/src/transformers/cleanData');
+const { cleanData } = require('@private.ankit047/data-analyzer');
 
-const data = [
-    { name: 'Alice', age: 30 },
-    { name: 'Bob', age: 25 },
-    { name: 'Alice', age: 30 }
-];
+async function cleanAndPrepareData() {
+    let data = await parseCSV('path/to/your/file.csv');
+    const cleanedData = cleanData(data, { removeDuplicates: true, fillMissing: 0 });
+    console.log(cleanedData);
+}
 
-const cleanedData = cleanData(data, { removeDuplicates: true });
-console.log(cleanedData);
+cleanAndPrepareData();
 ```
 
-### 📈 Analyzing Data
+### Step 3: Analyzing the Data
 
-For statistical analysis, use the `analyzeData` function:
+With cleaned data, you can now perform analysis using the `analyzeData` function. This function can compute various statistics such as averages, sums, and more.
 
 ```javascript
-const analyzeData = require('data-analyzer/src/analyzers/analyzeData');
+const { analyzeData } = require('@private.ankit047/data-analyzer');
 
-const data = [1, 2, 3, 4, 5];
-const analysis = analyzeData(data);
-console.log(analysis);
+async function analyzeCleanedData() {
+    let data = await parseCSV('path/to/your/file.csv');
+    const cleanedData = cleanData(data, { removeDuplicates: true, fillMissing: 0 });
+    const analysisResults = analyzeData(cleanedData);
+    console.log(analysisResults);
+}
+
+analyzeCleanedData();
 ```
 
-### 📊 Visualizing Data
+### Step 4: Visualizing the Results
 
-Generate visualizations with the `plotData` function:
+Finally, you can visualize the analysis results using the `plotData` function. This allows you to create charts and graphs to better understand the data.
 
 ```javascript
-const plotData = require('data-analyzer/src/visualizers/plotData');
+const { plotData } = require('@private.ankit047/data-analyzer');
 
-const data = [1, 2, 3, 4, 5];
-plotData(data);
+async function visualizeAnalysis() {
+    let data = await parseCSV('path/to/your/file.csv');
+    const cleanedData = cleanData(data, { removeDuplicates: true, fillMissing: 0 });
+    const analysisResults = analyzeData(cleanedData);
+    plotData(analysisResults);
+}
+
+visualizeAnalysis();
 ```
 
-## 🛠️ API Documentation
+## 📜 API Reference
 
-### 🔍 parseCSV
+### 1. `parseCSV(filePath: string): Promise<Object[]>`
 
-**Parameters:**
-- `filePath` (string): The path to the CSV file.
+- **Description**: Parses the specified CSV file and returns an array of objects.
+- **Parameters**:
+  - `filePath`: The path to the CSV file (must be a valid file path).
+- **Returns**: A promise that resolves to an array of parsed objects.
+- **Example**:
+  ```javascript
+  const data = await parseCSV('data/sample.csv');
+  ```
 
-**Returns:** 
-- A Promise that resolves to an array of parsed objects.
+### 2. `cleanData(data: Object[], options: Object): Object[]`
 
-### 🧼 cleanData
+- **Description**: Cleans the input data based on the specified options.
+- **Parameters**:
+  - `data`: An array of objects to be cleaned.
+  - `options`: An object specifying cleaning options:
+    - `removeDuplicates` (Boolean): Remove duplicate entries (default: false).
+    - `fillMissing` (Any): Fill missing values with the specified value.
+- **Returns**: An array of cleaned objects.
+- **Example**:
+  ```javascript
+  const cleanedData = cleanData(data, { removeDuplicates: true, fillMissing: 0 });
+  ```
 
-**Parameters:**
-- `data` (Array): The data to be cleaned.
-- `options` (Object): Options for cleaning:
-  - `removeDuplicates` (boolean): Remove duplicate entries.
-  - `fillMissing` (any): Fill missing values with the specified value.
+### 3. `analyzeData(data: Object[]): Object`
 
-**Returns:**
-- An array of cleaned data.
+- **Description**: Performs statistical analysis on the given data.
+- **Parameters**:
+  - `data`: An array of objects to analyze.
+- **Returns**: An object containing analysis results such as averages and totals.
+- **Example**:
+  ```javascript
+  const results = analyzeData(cleanedData);
+  ```
 
-### 📊 analyzeData
+### 4. `plotData(data: Object): void`
 
-**Parameters:**
-- `data` (Array): An array of numerical values.
+- **Description**: Generates a visualization based on the analysis results.
+- **Parameters**:
+  - `data`: The analysis results to visualize.
+- **Returns**: None. The function renders the plot.
+- **Example**:
+  ```javascript
+  plotData(results);
+  ```
 
-**Returns:**
-- An object containing statistical analysis results, such as mean and median.
+## 🛠️ Additional Features
 
-### 📈 plotData
+- **Error Handling**: All functions include basic error handling to manage issues like file not found or invalid data formats.
+- **Support for Multiple File Formats**: While primarily focused on CSV, you can extend parsing to support other formats with additional functions.
+- **Customization Options**: Many functions accept additional parameters to customize their behavior (e.g., specifying which columns to analyze).
 
-**Parameters:**
-- `data` (Array): The data to be visualized.
+## 📄 License
 
-**Returns:**
-- A generated chart or graph.
-
-## ✅ Testing
-
-To run tests for the package, use the following command:
-
-```bash
-npm test
-```
-
-Ensure that you have all the necessary test files set up as described in the project structure.
+This project is licensed under the [MIT License](LICENSE).
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please follow these steps:
+Contributions are welcome! If you have suggestions for improvements or new features, please feel free to create a pull request or open an issue. Before contributing, please ensure you follow the coding standards and provide tests for any new functionality.
 
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/YourFeature`).
-3. Make your changes and commit them (`git commit -m 'Add new feature'`).
-4. Push to the branch (`git push origin feature/YourFeature`).
-5. Create a new Pull Request.
+### Guidelines for Contribution:
 
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+1. **Fork the repository** and create your branch from `main`.
+2. **Make your changes** and ensure all tests pass.
+3. **Commit your changes** with a clear message.
+4. **Push to your fork** and submit a pull request.
 
 ## 📧 Contact
 
-Created by [Ankit](https://github.com/imankii01) - feel free to reach out:
+For any inquiries, feel free to reach out:
 
-- Email: [private.ankit047@gmail.com](mailto:private.ankit047@gmail.com)
+- **Name**: Ankit
+- **Email**: [private.ankit047@gmail.com](mailto:private.ankit047@gmail.com)
+- **GitHub**: [@imankii01](https://github.com/imankii01)
+
+---
+
+Happy analyzing! 🎉
+```
+
+### Key Enhancements
+
+1. **Expanded Usage Examples**: Provided step-by-step examples for parsing, cleaning, analyzing, and visualizing data.
+2. **Detailed API Reference**: Each function is explained with parameters, return types, and example usage to ensure clarity.
+3. **Additional Features**: Mentioned error handling, support for multiple file formats, and customization options.
+4. **Contributing Guidelines**: Clear steps for how others can contribute to your project.
+5. **Professional Formatting**: Used headings, bullet points, and code blocks for easy readability.
